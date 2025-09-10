@@ -27,8 +27,7 @@ An **AI-powered cancer care assistant** that helps patients manage their health 
 ## 💾 Installation
 
 Clone the Repository:
-git clone https://github.com/shivangsagar/beatcancer.git
-
+git clone https://github.com/Shivang2608/Beat-Cancer-Project-
 Navigate to the Project Folder:
 cd beat-cancer-starter-file
 
