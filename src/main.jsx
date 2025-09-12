@@ -6,13 +6,15 @@ import { StateContextProvider } from "./context";
 import App from "./App";
 import "./index.css";
 import { PrivyProvider } from "@privy-io/react-auth";
+import { Buffer } from 'buffer';
+window.Buffer = Buffer;
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <PrivyProvider
-    appId="clz5th2t100r3sbdu44h7zzn6"
-    config={{
+    appId={import.meta.env.VITE_PRIVY_APP_ID}
+  config={{
       appearance: {
         theme: "dark",
       },
