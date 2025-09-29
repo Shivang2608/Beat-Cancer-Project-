@@ -7,6 +7,6 @@ export default defineConfig({
   out: './drizzle',
   dialect: 'postgresql',
   dbCredentials: {
-    url: meta.env.VITE_NEON_DATABASE_URL,
+    url: process.env.NEON_DATABASE_URL,
   },
 });
