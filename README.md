@@ -12,80 +12,149 @@
   <img src="https://user-images.githubusercontent.com/84136055/205307321-017e8c3b-2d79-459f-a2e6-76a08990c6b1.png" alt="Beat Cancer Project Banner">
 </p>
 
-<h1 align="center">BeatCancer 🩺💻</h1>
+BeatCancer 🩺💻
 
-<p align="center">
-  An AI-powered cancer care assistant, built with React and Google Gemini, that analyzes medical records to create personalized treatment plans.
-</p>
+AI-Powered Precision Oncology Assistant
 
-<p align="center">
-  <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black" alt="React">
-  <img src="https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white" alt="Vite">
-  <img src="https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white" alt="Tailwind CSS">
-  <img src="https://img.shields.io/badge/Gemini_AI-4A80F5?style=for-the-badge&logo=googlebard&logoColor=white" alt="Gemini AI">
-  <img src="https://img.shields.io/badge/Privy-2F2B2B?style=for-the-badge&logo=privy&logoColor=white" alt="Privy">
-  <img src="https://img.shields.io/badge/Neon-0E1015?style=for-the-badge&logo=neon&logoColor=white" alt="Neon">
-  <img src="https://img.shields.io/badge/Drizzle_ORM-C5F74F?style=for-the-badge&logo=drizzle&logoColor=black" alt="Drizzle ORM">
-</p>
+BeatCancer is a cutting-edge web application designed to assist patients and care providers by leveraging Google Gemini AI to analyze complex medical data, generate personalized treatment roadmaps, and manage patient records via an interactive, secure platform.
 
----
+✨ Features and Capabilities
 
-## 🚀 Key Features
+Our platform integrates secure authentication with advanced data processing and visualization tools to provide a comprehensive cancer care management solution.
 
-* 🔐 **Secure Authentication:** User login and signup handled by **Privy**.
-* 👤 **New User Onboarding:** A "Get Started" page to save new user profiles to the database.
-* 📤 **File Upload:** Users can upload medical reports for analysis.
-* 🧠 **AI Medical Analysis:** Uses **Google Gemini AI** to read medical reports and generate a detailed text analysis.
-* 📊 **AI Treatment Plan:** Calls Gemini a second time to parse the text analysis into a structured JSON task list.
-* ↔️ **Interactive Kanban Board:** A drag-and-drop board (using **@dnd-kit/core**) to visualize and manage the "Todo," "Work in progress," and "Done" tasks.
-* 💾 **Persistent State:** Saves all user data, medical records, and Kanban board changes to a **Neon** cloud database.
+🧠 Core AI Engine (Powered by Google Gemini)
 
----
+AI Medical Analysis: Users can upload unstructured medical documents (e.g., pathology reports, lab results). The Gemini API reads these reports, performs a detailed textual analysis, and extracts key diagnostic and prognostic information.
 
-## 🛠️ Tech Stack
+AI Treatment Plan Generation: Using the analysis from the first step, Gemini is called a second time to transform the text summary into a highly structured, actionable JSON task list, ensuring treatment steps are clear and organized.
 
-* **Frontend:** React.js (with Vite)
-* **Styling:** Tailwind CSS
-* **Authentication:** Privy
-* **Database:** Neon (PostgreSQL)
-* **ORM:** Drizzle ORM
-* **AI Integration:** Google Gemini AI
-* **Drag & Drop:** @dnd-kit/core
+Personalized Roadmaps: The AI output is tailored into individual task pipelines, representing the next steps in screening, appointment scheduling, and treatment protocols.
 
----
+📊 Data Management & Interaction
 
-## 💾 Get Started
+Interactive Kanban Board: All AI-generated treatment tasks are visualized on a drag-and-drop Kanban board built with @dnd-kit/core. Users can easily manage tasks across "To Do," "Work in Progress," and "Done" columns.
 
-Follow these instructions to get the project running locally.
+Persistent State: All user profiles, uploaded medical records, and the real-time status of the Kanban board are securely saved to a cloud-hosted Neon (PostgreSQL) database.
 
-### 1. Clone the Repository
-```bash
+Secure File Upload: Users can safely upload and store their medical reports for AI processing and record-keeping.
+
+🔐 Security and Architecture
+
+Secure Authentication: User login and sign-up are handled by Privy, providing secure, wallet-enabled, and traditional email/password authentication.
+
+New User Onboarding: A streamlined "Get Started" page ensures new user profiles are correctly initialized and saved to the database upon registration.
+
+Data Isolation: All user data, medical records, and Kanban board changes are saved persistently, ensuring a continuous and secure patient journey.
+
+🛠️ Tech Stack
+
+Category
+
+Technology
+
+Purpose
+
+Frontend
+
+React.js (with Vite)
+
+Fast, modern frontend development.
+
+Styling
+
+Tailwind CSS
+
+Utility-first CSS framework for rapid, responsive styling.
+
+AI/ML
+
+Google Gemini AI
+
+Core engine for document analysis and structured data generation.
+
+Authentication
+
+Privy
+
+Secure, robust authentication and identity management.
+
+Database
+
+Neon (PostgreSQL)
+
+Serverless, scalable cloud database for persistent state.
+
+ORM
+
+Drizzle ORM
+
+TypeScript ORM for interacting with the database schema.
+
+UI Interaction
+
+@dnd-kit/core
+
+Modern library for interactive drag-and-drop Kanban functionality.
+
+💾 Get Started Locally
+
+Follow these instructions to set up and run the project on your machine.
+
+Prerequisites
+
+Node.js (LTS version)
+
+A Privy application ID.
+
+A Neon (PostgreSQL) database connection URL.
+
+A Google Gemini API Key.
+
+1. Clone the Repository
+
 git clone [https://github.com/Shivang2608/Beat-Cancer-Project-.git](https://github.com/Shivang2608/Beat-Cancer-Project-.git)
-
-2. Navigate to Project Folder
-Bash
-
 cd Beat-Cancer-Project-
-3. Install Dependencies
-Bash
+
+
+2. Install Dependencies
+
+Install all necessary dependencies (including the corrected Vite plugin versions):
 
 npm install
-4. Setup Environment
-Create a .env file in the root of the project and add your API keys:
 
+
+3. Setup Environment Variables
+
+Create a file named .env in the root directory of the project and add your API keys. Note the use of NEON_DATABASE_URL (server-side) for Drizzle and VITE_PRIVY_APP_ID (client-side) for Privy/Vite.
+
+# --- SERVER-SIDE SECRETS (FOR DATABASE) ---
+NEON_DATABASE_URL="your_neon_database_url" 
+
+# --- CLIENT-SIDE SECRETS (FOR BROWSER) ---
 VITE_PRIVY_APP_ID="your_privy_app_id"
-DATABASE_URL="your_neon_database_url"
 VITE_GOOGLE_GEMINI_API_KEY="your_gemini_api_key"
-5. Push Database Schema
-Push the Drizzle schema to your new Neon database:
 
-Bash
+
+4. Push Database Schema
+
+Use Drizzle to push your schema structure to your Neon database:
 
 npm run db:push
-6. Run the App
-Start the development server:
 
-Bash
+
+5. Run the App
+
+Start the local development server:
 
 npm run dev
-Open http://localhost:5173 in your browser.
+
+
+The application will open at http://localhost:5173 (or a similar port) in your browser.
+
+🌐 Deployment Configuration
+
+For successful deployment on Vercel, you must perform these final, critical security and configuration steps:
+
+Vercel Secrets: In your Vercel Dashboard, set the NEON_DATABASE_URL as an Environment Variable.
+
+Privy Authorized Domains: In your Privy application settings, add your deployment URL (https://beat-cancer-project.vercel.app) to the Allowed origins list to prevent 403 Forbidden errors.
