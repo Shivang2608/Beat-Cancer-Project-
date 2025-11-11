@@ -136,18 +136,31 @@ function SingleRecordDetails() {
     const result = await model.generateContent(prompt);
     const response = await result.response;
     const text = response.text();
-    const parsedResponse = JSON.parse(text);
-
+    // Clean the string to remove backticks and "json"
+    const cleanedText = text.replace("```json", "").replace("```", "").trim();
+    // Parse the *cleaned* text
+    const parsedResponse = JSON.parse(cleanedText);
     console.log(text);
     console.log(parsedResponse);
+    
     const updatedRecord = await updateRecord({
       documentID: state.id,
-      kanbanRecords: text,
+      kanbanRecords: cleanedText,
     });
     console.log(updatedRecord);
-    navigate("/screening-schedules", { state: parsedResponse });
-    setIsProcessing(false);
-  };
+
+    // --- THIS IS THE FIX ---
+    // We pass an object containing BOTH the document ID and the tasks
+    navigate("/screening-schedules", {
+      state: {
+        id: state.id, // This is the document ID from the previous page
+        ...parsedResponse // This adds the { columns, tasks }
+      }
+    });
+    // --- END OF FIX ---
+
+    setIsProcessing(false);
+  };
 
   return (
     <div className="flex flex-wrap gap-[26px]">

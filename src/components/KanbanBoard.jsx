@@ -11,8 +11,13 @@ import { createPortal } from "react-dom";
 import ColumnContainer from "./ColumnContainer";
 import TaskCard from "./TaskCard";
 import { IconPlus } from "@tabler/icons-react";
+import { useStateContext } from "../context"; // Import context
 
 function KanbanBoard({ state }) {
+  const { updateRecord } = useStateContext();
+  // Get the 'id' of the document from the state passed by the router
+  const documentID = state?.state?.id;
+
   const defaultCols =
     state?.state?.columns?.map((col) => ({
       id: col?.id,
@@ -98,18 +103,23 @@ function KanbanBoard({ state }) {
     </div>
   );
 
+  // --- THESE FUNCTIONS NOW SAVE ON EVERY CHANGE ---
+
   function createTask(columnId) {
     const newTask = {
       id: generateId(),
       columnId,
       content: `Task ${tasks.length + 1}`,
     };
-    setTasks([...tasks, newTask]);
+    const newTasks = [...tasks, newTask];
+    setTasks(newTasks);
+    saveToDatabase(columns, newTasks);
   }
 
   function deleteTask(id) {
     const newTasks = tasks.filter((task) => task.id !== id);
     setTasks(newTasks);
+    saveToDatabase(columns, newTasks);
   }
 
   function updateTask(id, content) {
@@ -117,6 +127,7 @@ function KanbanBoard({ state }) {
       task.id === id ? { ...task, content } : task,
     );
     setTasks(newTasks);
+    saveToDatabase(columns, newTasks);
   }
 
   function createNewColumn() {
@@ -124,16 +135,23 @@ function KanbanBoard({ state }) {
       id: generateId(),
       title: `Column ${columns.length + 1}`,
     };
-    setColumns([...columns, newColumn]);
+    const newColumns = [...columns, newColumn];
+    setColumns(newColumns);
+    saveToDatabase(newColumns, tasks);
   }
 
   function deleteColumn(id) {
-    setColumns(columns.filter((col) => col.id !== id));
-    setTasks(tasks.filter((task) => task.columnId !== id));
+    const newColumns = columns.filter((col) => col.id !== id);
+    setColumns(newColumns);
+    const newTasks = tasks.filter((task) => task.columnId !== id);
+    setTasks(newTasks);
+    saveToDatabase(newColumns, newTasks);
   }
 
   function updateColumn(id, title) {
-    setColumns(columns.map((col) => (col.id === id ? { ...col, title } : col)));
+    const newColumns = columns.map((col) => (col.id === id ? { ...col, title } : col));
+    setColumns(newColumns);
+    saveToDatabase(newColumns, tasks);
   }
 
   function onDragStart(event) {
@@ -144,70 +162,113 @@ function KanbanBoard({ state }) {
     }
   }
 
+  // --- THIS IS THE CORRECTED FUNCTION ---
   function onDragEnd(event) {
     setActiveColumn(null);
     setActiveTask(null);
 
     const { active, over } = event;
     if (!over) return;
-
     if (active.id === over.id) return;
 
     const isActiveAColumn = active.data.current?.type === "Column";
+
     if (isActiveAColumn) {
-      setColumns((columns) => {
-        const activeIndex = columns.findIndex((col) => col.id === active.id);
-        const overIndex = columns.findIndex((col) => col.id === over.id);
-        return arrayMove(columns, activeIndex, overIndex);
+      // User dragged a column
+      setColumns((currentCols) => {
+        const activeIndex = currentCols.findIndex((col) => col.id === active.id);
+        const overIndex = currentCols.findIndex((col) => col.id === over.id);
+        
+        const newColumns = arrayMove(currentCols, activeIndex, overIndex);
+        
+        // Save the new state
+        saveToDatabase(newColumns, tasks); 
+        
+        return newColumns; // Return new state for React
       });
     } else {
-      const isActiveATask = active.data.current?.type === "Task";
-      const isOverATask = over.data.current?.type === "Task";
-      if (isActiveATask && isOverATask) {
-        setTasks((tasks) => {
-          const activeIndex = tasks.findIndex((t) => t.id === active.id);
-          const overIndex = tasks.findIndex((t) => t.id === over.id);
-          if (tasks[activeIndex].columnId !== tasks[overIndex].columnId) {
-            tasks[activeIndex].columnId = tasks[overIndex].columnId;
-            return arrayMove(tasks, activeIndex, overIndex - 1);
+      // User dragged a task
+      setTasks((currentTasks) => {
+        const activeIndex = currentTasks.findIndex((t) => t.id === active.id);
+        let newTasks = [...currentTasks]; // Make a copy
+
+        const isOverATask = over.data.current?.type === "Task";
+        if (isOverATask) {
+          const overIndex = currentTasks.findIndex((t) => t.id === over.id);
+          // Check if columns are different
+          if (currentTasks[activeIndex].columnId !== currentTasks[overIndex].columnId) {
+            newTasks[activeIndex] = { ...newTasks[activeIndex], columnId: currentTasks[overIndex].columnId };
+            newTasks = arrayMove(newTasks, activeIndex, overIndex);
+          } else {
+            // Same column, just reorder
+            newTasks = arrayMove(newTasks, activeIndex, overIndex);
           }
-          return arrayMove(tasks, activeIndex, overIndex);
-        });
-      } else if (isActiveATask) {
-        setTasks((tasks) => {
-          const activeIndex = tasks.findIndex((t) => t.id === active.id);
-          tasks[activeIndex].columnId = over.id;
-          return arrayMove(tasks, activeIndex, activeIndex);
-        });
-      }
+        } else {
+          // Task is over a column
+          const overColumnId = over.id;
+          if (newTasks[activeIndex].columnId !== overColumnId) {
+            newTasks[activeIndex] = { ...newTasks[activeIndex], columnId: overColumnId };
+            newTasks = arrayMove(newTasks, activeIndex, activeIndex); // Keep position, just change column
+          }
+        }
+        
+        // Save the new state
+        saveToDatabase(columns, newTasks);
+
+        return newTasks; // Return new state for React
+      });
+    }
+  }
+  // --- END OF FIX ---
+
+  async function saveToDatabase(newColumns, newTasks) {
+    const kanbanData = {
+      columns: newColumns,
+      tasks: newTasks,
+    };
+    
+    try {
+      await updateRecord({
+        documentID: documentID,
+        kanbanRecords: JSON.stringify(kanbanData), // Save as a JSON string
+      });
+      console.log("Kanban board saved!");
+    } catch (error) {
+      console.error("Failed to save Kanban board:", error);
     }
   }
 
   function onDragOver(event) {
     const { active, over } = event;
     if (!over) return;
-
     if (active.id === over.id) return;
 
     const isActiveATask = active.data.current?.type === "Task";
+    if (!isActiveATask) return;
+
     const isOverATask = over.data.current?.type === "Task";
-    if (isActiveATask && isOverATask) {
-      setTasks((tasks) => {
-        const activeIndex = tasks.findIndex((t) => t.id === active.id);
+    const isOverAColumn = over.data.current?.type === "Column";
+
+    setTasks((tasks) => {
+      const activeIndex = tasks.findIndex((t) => t.id === active.id);
+      let newTasks = [...tasks];
+
+      if (isOverATask) {
         const overIndex = tasks.findIndex((t) => t.id === over.id);
-        if (tasks[activeIndex].columnId !== tasks[overIndex].columnId) {
-          tasks[activeIndex].columnId = tasks[overIndex].columnId;
-          return arrayMove(tasks, activeIndex, overIndex - 1);
+        if (newTasks[activeIndex].columnId !== newTasks[overIndex].columnId) {
+          newTasks[activeIndex] = { ...newTasks[activeIndex], columnId: newTasks[overIndex].columnId };
+          return arrayMove(newTasks, activeIndex, overIndex);
         }
-        return arrayMove(tasks, activeIndex, overIndex);
-      });
-    } else if (isActiveATask) {
-      setTasks((tasks) => {
-        const activeIndex = tasks.findIndex((t) => t.id === active.id);
-        tasks[activeIndex].columnId = over.id;
-        return arrayMove(tasks, activeIndex, activeIndex);
-      });
-    }
+        return arrayMove(newTasks, activeIndex, overIndex);
+      } else if (isOverAColumn) {
+        const overColumnId = over.id;
+        if (newTasks[activeIndex].columnId !== overColumnId) {
+          newTasks[activeIndex] = { ...newTasks[activeIndex], columnId: overColumnId };
+          return arrayMove(newTasks, activeIndex, activeIndex);
+        }
+      }
+      return newTasks;
+    });
   }
 }
 
