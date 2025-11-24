@@ -1,7 +1,6 @@
 import { neon } from "@neondatabase/serverless";
 import { drizzle } from "drizzle-orm/neon-http";
 import * as schema from "./schema";
-const sql = neon(
- "postgresql://neondb_owner:npg_Vitn6rYvQp5g@ep-solitary-bonus-a1xn12cz-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require"   
- );
+const sql = neon(import.meta.env.VITE_NEON_DATABASE_URL);
+
 export const db = drizzle(sql, { schema });

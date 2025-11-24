@@ -21,7 +21,7 @@
     "@thirdweb-dev/sdk": "^3",
     "appwrite": "14.0.1",
     "buffer": "^6.0.3",
-    "dotenv": "^16.4.5",
+    "dotenv": "^16.6.1",
     "drizzle-orm": "^0.32.1",
     "ethers": "^5.7.2",
     "markdown-to-jsx": "^7.4.7",
@@ -38,7 +38,7 @@
     "remark-math": "^6.0.0"
   },
   "devDependencies": {
-    "@vitejs/plugin-react": "^2",
+    "@vitejs/plugin-react": "^2.2.0",
     "autoprefixer": "^10.4.13",
     "drizzle-kit": "^0.23.0",
     "postcss": "^8.4.19",
