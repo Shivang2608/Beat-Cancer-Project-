@@ -36,16 +36,13 @@ Our platform integrates secure authentication with advanced data processing and 
 3. Data Isolation: All user data, medical records, and Kanban board changes are saved persistently, ensuring a continuous and secure patient journey.
 
 🛠️ Tech Stack
-Category                |        Technology                |        Purpose
-________________________|__________________________________|____________________________________________________________________________                                 |
-Frontend                |        React.js (with Vite)      |        Fast, modern frontend development.
-Styling                 |        Tailwind CSS              |        Utility-first CSS framework for rapid, responsive styling.
-AI/ML                   |        Google Gemini AI          |        Core engine for document analysis and structured data generation.
-Authentication          |        Privy                     |        Secure, robust authentication and identity management.
-Database                |        Neon (PostgreSQL)         |        Serverless, scalable cloud database for persistent state.
-ORM                     |        Drizzle ORM               |        TypeScript ORM for interacting with the database schema.
-UI Interaction          |        @dnd-kit/core             |        Modern library for interactive drag-and-drop Kanban functionality.
-_________________________________________________________________________________________________________________________________________
+1. Frontend: React.js (with Vite) – Fast, modern frontend development.
+2. Styling: Tailwind CSS – Utility-first CSS framework for rapid, responsive styling.
+3. AI/ML: Google Gemini AI – Core engine for document analysis and structured data generation.
+4. Authentication: Privy – Secure, robust authentication and identity management.
+5. Database: Neon (PostgreSQL) – Serverless, scalable cloud database for persistent state.
+6. ORM: Drizzle ORM – TypeScript ORM for interacting with the database schema.
+7. UI Interaction: @dnd-kit/core – Modern library for interactive drag-and-drop Kanban functionality.
 
 💾 Get Started Locally
 
