@@ -96,6 +96,3 @@ For successful deployment on Vercel, you must perform these final, critical secu
 1. Vercel Secrets: In your Vercel Dashboard, set the NEON_DATABASE_URL as an Environment Variable.
 2. Privy Authorized Domains: In your Privy application settings, add your deployment URL (https://beat-cancer-project.vercel.app) to the Allowed origins list to prevent 403 Forbidden errors.
 
-Vercel Secrets: In your Vercel Dashboard, set the NEON_DATABASE_URL as an Environment Variable.
-
-Privy Authorized Domains: In your Privy application settings, add your deployment URL (https://beat-cancer-project.vercel.app) to the Allowed origins list to prevent 403 Forbidden errors.
