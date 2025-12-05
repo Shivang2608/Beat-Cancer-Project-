@@ -1,3 +1,5 @@
+![Uploading Screenshot 2025-11-23 111429.png…]()
+<img width="1282" height="560" alt="Screenshot 2025-11-23 111313" src="https://github.com/user-attachments/assets/48ca82c0-715b-4693-9aee-cf12a18544d1" />
 <p align="center">
   <img src="https://user-images.githubusercontent.com/84136055/205307321-017e8c3b-2d79-459f-a2e6-76a08990c6b1.png" alt="Beat Cancer Project Banner" width="100%">
 </p>
