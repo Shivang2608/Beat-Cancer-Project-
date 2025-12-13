@@ -1,3 +1,15 @@
+<img width="1024" height="453" alt="Screenshot 2025-11-23 111915" src="https://github.com/user-attachments/assets/8b1f5387-740c-44f0-9f06-ba3d573df99c" />
+<img width="745" height="402" alt="Screenshot 2025-11-23 111858" src="https://github.com/user-attachments/assets/00ae25bd-03cf-4ef8-b5aa-0ebec31f9fc7" />
+<img width="407" height="488" alt="Screenshot 2025-11-23 111839" src="https://github.com/user-attachments/assets/9a5fe99d-ac7d-4b17-8308-c3c1860d995b" />
+<img width="940" height="410" alt="Screenshot 2025-11-23 111829" src="https://github.com/user-attachments/assets/3a8aa886-0b25-43d2-bc73-92344cf11cb8" />
+<img width="1033" height="384" alt="Screenshot 2025-11-23 111811" src="https://github.com/user-attachments/assets/4362d4f4-7aea-4e98-9830-87cc67a2b8f3" />
+<img width="1895" height="838" alt="Screenshot 2025-11-23 111429" src="https://github.com/user-attachments/assets/b39b4a5c-f8eb-4317-a7d7-b4cf81937d7d" />
+<img width="892" height="432" alt="Screenshot 2025-11-23 111743" src="https://github.com/user-attachments/assets/a30de705-f720-4d06-b414-232355e7196c" />
+<img width="649" height="434" alt="Screenshot 2025-11-23 111755" src="https://github.com/user-attachments/assets/7030826c-59a5-4b21-9e6c-0ccf013fb853" />
+<img width="951" height="442" alt="Screenshot 2025-11-23 111654" src="https://github.com/user-attachments/assets/3987f100-9269-4149-8ff0-b6177464cf7e" />
+<img width="805" height="443" alt="Screenshot 2025-11-23 111717" src="https://github.com/user-attachments/assets/7e3dc5b3-2dfb-4c39-8796-a4a16c1e8e57" />
+<img width="940" height="453" alt="Screenshot 2025-11-23 111637" src="https://github.com/user-attachments/assets/f45ec281-e0eb-4cfc-ae72-8a6bca32668a" />
+
 <p align="center">
   <img src="https://user-images.githubusercontent.com/84136055/205307321-017e8c3b-2d79-459f-a2e6-76a08990c6b1.png" alt="Beat Cancer Project Banner" width="100%">
 </p>
