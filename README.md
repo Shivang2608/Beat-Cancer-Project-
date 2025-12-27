@@ -80,24 +80,16 @@ npm run dev
 The application will open at http://localhost:5173.
 
 🌐 Deployment Configuration
-<<<<<<< HEAD
 For successful deployment on Vercel, perform these critical steps:
 
 Vercel Secrets: In your Vercel Dashboard, set the NEON_DATABASE_URL as an Environment Variable.
 
 Privy Authorized Domains: In your Privy application settings, add your deployment URL (https://beat-cancer-project.vercel.app) to the "Allowed Origins" list to prevent 403 errors.
 
+⚠️ Disclaimer & Ethical Use
+
+- BeatCancer is an assistive tool and does not replace professional medical advice.
+- AI-generated insights are meant to support decision-making, not provide diagnoses.
+- Patient data is securely stored and isolated per user.
+
 <p align="center"> Built with ❤️ by Shivang </p>
-=======
-
-For successful deployment on Vercel, you must perform these final, critical security and configuration steps:
-1. Vercel Secrets: In your Vercel Dashboard, set the NEON_DATABASE_URL as an Environment Variable.
-2. Privy Authorized Domains: In your Privy application settings, add your deployment URL (https://beat-cancer-project.vercel.app) to the Allowed origins list to prevent 403 Forbidden errors.
-
-<<<<<<< HEAD
-Vercel Secrets: In your Vercel Dashboard, set the NEON_DATABASE_URL as an Environment Variable.
-
-Privy Authorized Domains: In your Privy application settings, add your deployment URL (https://beat-cancer-project.vercel.app) to the Allowed origins list to prevent 403 Forbidden errors.
->>>>>>> 8d01804 (Refactor README for improved clarity and organization)
-=======
->>>>>>> 0604194 (Remove duplicate deployment instructions from README)
